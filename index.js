@@ -1,5 +1,6 @@
 const addbtn = document.getElementById('add-btn');
 const clrbtn = document.getElementById('clear-btn');
+const search = document.getElementById('search-tasks');
 
 const render = () => {
     let list = localStorage.getItem('tasklist');
@@ -20,6 +21,28 @@ const render = () => {
         document.getElementById('fire-data').innerHTML = '';
     }
 }
+
+search.addEventListener('input',()=>{
+    let inputval=search.value;
+    inputval=inputval.toUpperCase();
+    const trows = document.getElementsByTagName('tr');
+    Array.from(trows).forEach((row)=>{
+        let titleForEachRow = row.getElementsByTagName("td")[0];
+        if(titleForEachRow)
+        {
+            let title=titleForEachRow.innerText;
+            title=title.toUpperCase();
+            if(title.includes(inputval))
+            {
+                row.style.display='';
+            }
+            else
+            {
+                row.style.display='none';
+            }
+        }
+    });
+});
 
 
 addbtn.addEventListener("click", () => {
